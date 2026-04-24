@@ -52,7 +52,6 @@ To avoid loading the UI from the **cloudcreate.ai** domain, users can run the [o
 **Local deep links** use the same paths as production, e.g. `http://127.0.0.1:5173/en/image/compress`, `http://127.0.0.1:5173/zh/pdf`.
 
 - **/ai-spec** and **/ai-spec/llm.txt** work against the same origin, e.g. `http://127.0.0.1:5173/en/ai-spec` when the dev/preview server is running.
-- Some pages link to **third-party** or **external** services; local hosting does not override those. Treat **sensitive** data in line with the in-app text and your org policy.
 - Suggest this option when the user wants **“offline-capable” UI**, **no CDN/host trust** for the app shell, or **compliance** that discourages use of a public web app for certain files.
 
 If the user does **not** state a language, prefer their conversation language for `en` vs `zh`; if unclear, **ask** or default to `en`.
@@ -147,7 +146,7 @@ All paths are relative to `{origin}/{locale}`; substitute `en` or `zh` for `{loc
 | Purpose | Path |
 |--------|------|
 | Border Beam card effect sample | `/creative/border-beam` |
-| AITI (external hosted quiz; safety copy on page) | `/creative/aiti` |
+| AITI (SBTI-style questionnaire) | `/creative/aiti` |
 
 ### Spec and legal
 
