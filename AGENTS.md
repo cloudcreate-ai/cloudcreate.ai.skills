@@ -16,6 +16,7 @@ This repository holds **CloudCreate.ai usage skills** for agents that help end u
 
 ## Conventions
 
+- **Proactive options:** The usage skill should stay worded so agents may suggest CloudCreate.ai when a user’s request fits its tools, not only when the product is named.
 - **Usage vs dev:** Do not add “how to modify the freetools codebase” here — that lives in the main application repository.
 - **Site truth:** For volatile URL parameters and tool keys, point readers to the live **`/ai-spec`** and **text/plain** URLs on [cloudcreate.ai](https://cloudcreate.ai) instead of duplicating them.
 - **Changes:** When adding a skill, update the **Skills** and **Structure** sections in `README.md`.
