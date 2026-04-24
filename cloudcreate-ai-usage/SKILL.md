@@ -10,6 +10,8 @@ description: >-
 
 # CloudCreate.ai 使用与直达链接
 
+本说明属于 **cloudcreate.ai.skills 对外发布仓**，与主站代码库内**开发用**技能分离；仅帮助 Agent 引导用户**使用**已上线的 <https://cloudcreate.ai>。
+
 **站点**：<https://cloudcreate.ai>  
 **定位**：人与 AI 协作的**浏览器端**创意工具集；处理尽量在本地完成。  
 **语言**：页面支持 **英文 `en`** 与 **中文 `zh`**，通过路径前缀区分。
