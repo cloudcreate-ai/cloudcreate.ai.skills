@@ -6,7 +6,7 @@
 
 | 目录 | 说明 |
 |------|------|
-| [cloudcreate-freetools](./cloudcreate-freetools/) | 主站 freetools（SvelteKit）结构、新工具检查清单、UI 与 i18n 约定 |
+| [cloudcreate-ai-usage](./cloudcreate-ai-usage/) | **使用** <https://cloudcreate.ai>：功能列表、按需求选工具、拼带语义的直达 URL（en/zh、hash、与 /ai-spec 的关系） |
 
 ## 在项目中使用
 
