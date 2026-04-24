@@ -1,0 +1,6 @@
+{
+  "name": "cloudcreate-ai-skills",
+  "description": "CloudCreate.ai usage skills for Claude, Cursor, and other AI agents — feature catalog and shareable en/zh deep links for https://cloudcreate.ai",
+  "version": "1.0.0",
+  "skills": "./skills/"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "cloudcreate-ai-skills",
+  "version": "1.0.0",
+  "description": "CloudCreate.ai usage skills for AI agents — feature catalog, en/zh deep links, production site at https://cloudcreate.ai (not the freetools source repo)",
+  "author": {
+    "name": "CloudCreate.ai",
+    "url": "https://cloudcreate.ai"
+  },
+  "license": "MIT",
+  "keywords": [
+    "cloudcreate",
+    "cloudcreate.ai",
+    "freetools",
+    "tools",
+    "browser",
+    "image",
+    "pdf",
+    "workflow"
+  ],
+  "skills": ["skills"]
+}

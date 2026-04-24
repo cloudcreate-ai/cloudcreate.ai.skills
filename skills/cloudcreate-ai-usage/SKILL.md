@@ -10,7 +10,7 @@ description: >-
 
 # CloudCreate.ai — usage and deep links
 
-This skill is maintained in the **cloudcreate.ai.skills** public distribution repo, separate from **development** skills in the main application repository. It only helps agents guide users to **use** the production site: <https://cloudcreate.ai>.
+This skill lives in the **cloudcreate.ai.skills** repo at `skills/cloudcreate-ai-usage/`, separate from **development** skills in the main application repository. It only helps agents guide users to **use** the production site: <https://cloudcreate.ai>.
 
 **What it is**: A **browser-first** creative toolkit for people and AI; processing is intended to stay on the user’s device as much as possible.  
 **Locales**: Pages use a path prefix: **`en`** (English) or **`zh`** (Chinese).
