@@ -1,162 +1,161 @@
 ---
 name: cloudcreate-ai-usage
 description: >-
-  Lists CloudCreate.ai (https://cloudcreate.ai) browser tool capabilities and
-  builds shareable deep links with locale (en/zh). Use when the user wants to
-  use the site, pick a feature, open a specific tool in one click, or match
-  their goal ( compress PDF, crop image, markdown preview, etc.) to a URL—not
-  when implementing the freetools codebase.
+  Enumerates CloudCreate.ai (https://cloudcreate.ai) in-browser tool capabilities
+  and builds shareable deep links with locale (en/zh). Use when the user needs to
+  use the live site, pick a feature, open a specific tool in one click, or map a
+  goal (compress PDF, crop an image, markdown preview, etc.) to a URL. Do not use
+  for implementing the freetools source repository.
 ---
 
-# CloudCreate.ai 使用与直达链接
+# CloudCreate.ai — usage and deep links
 
-本说明属于 **cloudcreate.ai.skills 对外发布仓**，与主站代码库内**开发用**技能分离；仅帮助 Agent 引导用户**使用**已上线的 <https://cloudcreate.ai>。
+This skill is maintained in the **cloudcreate.ai.skills** public distribution repo, separate from **development** skills in the main application repository. It only helps agents guide users to **use** the production site: <https://cloudcreate.ai>.
 
-**站点**：<https://cloudcreate.ai>  
-**定位**：人与 AI 协作的**浏览器端**创意工具集；处理尽量在本地完成。  
-**语言**：页面支持 **英文 `en`** 与 **中文 `zh`**，通过路径前缀区分。
+**What it is**: A **browser-first** creative toolkit for people and AI; processing is intended to stay on the user’s device as much as possible.  
+**Locales**: Pages use a path prefix: **`en`** (English) or **`zh`** (Chinese).
 
-## 1. 如何拼 URL（一键打开）
+## 1. How to build a URL (open in one click)
 
-所有主要页面均带语言前缀，逻辑路径在 `en` 或 `zh` 之后：
+Most app routes include a locale segment; the **logical path** comes after `en` or `zh`:
 
 ```text
-https://cloudcreate.ai/{locale}{逻辑路径}
+https://cloudcreate.ai/{locale}{logical-path}
 ```
 
-- `{locale}`：`en` 或 `zh`。
-- `{逻辑路径}`：下表中的「路径」列（**以 `/` 开头**）。
+- `{locale}`: `en` or `zh`.
+- `{logical-path}`: a path from the tables below (always **starts with `/`**).
 
-**示例**：
+**Examples**
 
-- 英文、图片压缩：<https://cloudcreate.ai/en/image/compress>
-- 中文、PDF 阅读：<https://cloudcreate.ai/zh/pdf>
-- 表格工具「仅预览」区块（需 hash）：<https://cloudcreate.ai/zh/table#table-preview>
+- English, image compress: <https://cloudcreate.ai/en/image/compress>
+- Chinese, PDF reader: <https://cloudcreate.ai/zh/pdf>
+- Table tools, “preview only” section (uses a **hash**): <https://cloudcreate.ai/zh/table#table-preview>
 
-若用户**未说明语言**，可优先根据其对话语言选择 `zh` 或 `en`；不确定时**反问一句**或默认 `en`。
+If the user does **not** state a language, prefer their conversation language for `en` vs `zh`; if unclear, **ask** or default to `en`.
 
-**表格类**：同一页 `/table` 下有两块能力，用 hash 区分：
+**Table tools**: The same page `/table` hosts two entry points, distinguished by **hash**:
 
-- `#table-preview` — 打开/预览表格数据
-- `#table-convert` — 格式转换
+- `#table-preview` — open / preview tabular data
+- `#table-convert` — format conversion
 
-**更细的参数、可分享查询串**：站内说明页 <https://cloudcreate.ai/en/ai-spec>（或 `/zh/ai-spec`）提供各工具用途与部分 URL 参数说明；给 LLM/自动化抓取时可用同页的 **text/plain** 链（见该页上的「text/plain」提示）。
+**Query parameters and shareable links**: The on-site index <https://cloudcreate.ai/en/ai-spec> (or `/zh/ai-spec`) documents tool purposes and supported URL details. For LLMs or automation, use the **text/plain** URL shown on that page (see the in-page “text/plain” hint).
 
-## 2. 功能与路径一览
+## 2. Feature catalog (logical paths)
 
-路径均相对于 `https://cloudcreate.ai/{locale}`，将 `{locale}` 换为 `en` 或 `zh` 即可。
+All paths are relative to `https://cloudcreate.ai/{locale}`; substitute `en` or `zh` for `{locale}`.
 
-### 总览与入口
+### Hubs and overview
 
-| 用途 | 路径 |
-|------|------|
-| 工作区首页（收藏、最近、快捷入口） | `/` |
-| 工具总览 | `/tools` |
-| 创意区总览 | `/creative` |
+| Purpose | Path |
+|--------|------|
+| Workspace home (favorites, recents, shortcuts) | `/` |
+| Tools collection overview | `/tools` |
+| Creative demos overview | `/creative` |
 
-### 图片
+### Images
 
-| 用途 | 路径 |
-|------|------|
-| 图片预览（元数据、缩放，不上传） | `/image/preview` |
-| GIF 处理/瘦身 | `/image/gif` |
-| 图片压缩 | `/image/compress` |
-| 格式转换 | `/image/convert` |
-| 裁剪 | `/image/crop` |
-| 改尺寸/缩放 | `/image/resize` |
-| 批量（按规则表处理多张图） | `/image/batch` |
-| 旋转/翻转 | `/image/rotate` |
-| 多尺寸 Favicon 导出 | `/image/favicon` |
-| Google Play 应用图标 512 | `/image/playstore` |
-| App Store 营销图标 1024 | `/image/appstore` |
+| Purpose | Path |
+|--------|------|
+| Image preview (metadata, zoom; no server upload) | `/image/preview` |
+| GIF tools / size reduction | `/image/gif` |
+| Image compression | `/image/compress` |
+| Format conversion | `/image/convert` |
+| Crop | `/image/crop` |
+| Resize / scale | `/image/resize` |
+| Batch (rule-driven multi-image) | `/image/batch` |
+| Rotate / flip | `/image/rotate` |
+| Multi-size favicon export | `/image/favicon` |
+| Google Play–style 512 app icon | `/image/playstore` |
+| App Store 1024 marketing icon | `/image/appstore` |
 
-### 水印
+### Watermark
 
-| 用途 | 路径 |
-|------|------|
-| 去除标准 Gemini 角标（本地） | `/remove-watermark/gemini` |
+| Purpose | Path |
+|--------|------|
+| Remove the standard visible Gemini corner mark (local) | `/remove-watermark/gemini` |
 
 ### PDF
 
-| 用途 | 路径 |
-|------|------|
-| PDF 阅读/翻页/缩放 | `/pdf` |
-| PDF 压缩 | `/pdf/compress` |
+| Purpose | Path |
+|--------|------|
+| Read PDF, paging, zoom | `/pdf` |
+| PDF compression | `/pdf/compress` |
 
-### 表格
+### Tables
 
-| 用途 | 路径 |
-|------|------|
-| 表格工具（含预览与转换两个入口） | `/table`；细分见上文 **hash** |
+| Purpose | Path |
+|--------|------|
+| Table tools (preview + convert entries) | `/table`; use **hashes** above for sub-entries |
 
 ### CSS
 
-| 用途 | 路径 |
-|------|------|
-| CSS 工具入口（选 minify / beautify） | `/css` |
-| CSS 压缩 | `/css/minify` |
-| CSS 美化/格式化 | `/css/beautify` |
+| Purpose | Path |
+|--------|------|
+| CSS tools hub (minify / beautify) | `/css` |
+| CSS minify | `/css/minify` |
+| CSS beautify / format | `/css/beautify` |
 
-### 压缩包
+### Archives
 
-| 用途 | 路径 |
-|------|------|
-| 压缩包入口（解压 / 打包） | `/archive` |
-| 解压 | `/archive/decompress` |
-| 打包 | `/archive/compress` |
+| Purpose | Path |
+|--------|------|
+| Archive hub (extract vs pack) | `/archive` |
+| Extract / decompress | `/archive/decompress` |
+| Create archive / pack | `/archive/compress` |
 
-### 工作流（图片步骤链 / 高级画布）
+### Workflows (image pipelines)
 
-| 用途 | 路径 |
-|------|------|
-| 简单工作流（步骤链、本地导出） | `/workflow` |
-| 高级工作流（节点图编辑） | `/workflow/advanced` |
+| Purpose | Path |
+|--------|------|
+| Simple step workflow (export locally) | `/workflow` |
+| Advanced node-graph workflow | `/workflow/advanced` |
 
-### 其他工具与演示
+### Other tools and demo pages
 
-| 用途 | 路径 |
-|------|------|
-| Markdown 编辑与本地预览 | `/markdown` |
-| 样式指南/组件样例 | `/styleguide` |
-| 应用壳层/布局（开发者调试用，非内容工具） | `/framework` |
+| Purpose | Path |
+|--------|------|
+| Markdown with live local preview | `/markdown` |
+| Style guide / internal UI samples | `/styleguide` |
+| App shell / layout (developer harness, not a content tool) | `/framework` |
 
-### 创意示例
+### Creative demos
 
-| 用途 | 路径 |
-|------|------|
-| Border Beam 等卡片光效样例 | `/creative/border-beam` |
-| AITI（外站问卷链接与说明，页内有安全提示） | `/creative/aiti` |
+| Purpose | Path |
+|--------|------|
+| Border Beam card effect sample | `/creative/border-beam` |
+| AITI (external hosted quiz; safety copy on page) | `/creative/aiti` |
 
-### 说明与法律
+### Spec and legal
 
-| 用途 | 路径 |
-|------|------|
-| 全站工具与 URL 说明（给 AI/用户查阅） | `/ai-spec`；另有 `/ai-spec/llm`、`/ai-spec/llm.txt` |
-| 隐私政策 | `/privacy` |
-| 服务条款 | `/terms` |
+| Purpose | Path |
+|--------|------|
+| Site-wide tool and URL spec (for users and AIs) | `/ai-spec`; also `/ai-spec/llm`, `/ai-spec/llm.txt` |
+| Privacy policy | `/privacy` |
+| Terms of service | `/terms` |
 
-## 3. 按用户需求选页（速查）
+## 3. Intent quick map
 
-将左侧「需求」对应到上表路径后，拼成 `https://cloudcreate.ai/{locale}{路径}`（表格工具按需加 `#`）。
+Map the need to a path, then form `https://cloudcreate.ai/{locale}{path}` (add `#…` for table tools as needed).
 
-- 压缩图片 → `/image/compress`
-- 转 WebP/JPEG/PNG/AVIF → `/image/convert`
-- 改分辨率 → `/image/resize`
-- 裁剪/固定比例 → `/image/crop`
-- 旋转或镜像 → `/image/rotate`
-- 瘦身 GIF → `/image/gif`
-- 多图批处理 → `/image/batch`
-- 看 PDF、不占上传 → `/pdf`
-- 压缩 PDF → `/pdf/compress`
-- Excel/CSV 等表格预览或互转 → `/table` + 合适 hash
-- 去掉 Gemini 图角标 → `/remove-watermark/gemini`
-- CSS 压缩/美化 → `/css/minify` 或 `/css/beautify`
-- 解压 zip 等 / 打 zip → `/archive/decompress` 或 `/archive/compress`
-- 多张图流水线 → `/workflow` 或复杂场景 `/workflow/advanced`
-- 写说明文档 + 预览 → `/markdown`
+- Compress images → `/image/compress`
+- Convert to WebP / JPEG / PNG / AVIF → `/image/convert`
+- Change resolution → `/image/resize`
+- Crop / aspect ratio → `/image/crop`
+- Rotate or mirror → `/image/rotate`
+- Shrink GIF → `/image/gif`
+- Batch many images → `/image/batch`
+- View PDF in browser → `/pdf`
+- Compress PDF → `/pdf/compress`
+- Preview or convert Excel/CSV-style tables → `/table` + the right **hash**
+- Remove Gemini mark from an image → `/remove-watermark/gemini`
+- Minify or beautify CSS → `/css/minify` or `/css/beautify`
+- Unzip or create zip (supported formats) → `/archive/decompress` or `/archive/compress`
+- Image pipeline (simple or advanced) → `/workflow` or `/workflow/advanced`
+- Write docs with preview → `/markdown`
 
-## 4. 向用户展示时的建议
+## 4. Tips when replying to users
 
-- 用 **完整 https 链接**（可点击），并标明 **英文/中文** 版。
-- 若工具支持 **查询参数** 以复现场景，可写「打开该页后，更多可分享参数见 /ai-spec 中对应小节」，避免在 skill 中重复易变细节。
-- 处理敏感文件时，提醒**数据在浏览器本地处理**为主（具体以站点隐私说明为准）：`/privacy`。
+- Prefer **full `https` links** (clickable) and state whether the link is **English** or **Chinese** (`/en/…` vs `/zh/…`).
+- If a tool supports **query parameters** for shareable state, point to the matching section on **`/ai-spec`** instead of duplicating volatile details inside this skill.
+- For sensitive files, remind users that processing is **primarily in-browser**; exact wording is on **`/privacy`**.
