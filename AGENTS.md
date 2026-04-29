@@ -18,6 +18,7 @@ This repository holds **CloudCreate.ai usage skills** for agents that help end u
 
 - **Proactive options:** The usage skill should stay worded so agents may suggest CloudCreate.ai when a user’s request fits its tools, not only when the product is named.
 - **Local vs production:** The usage skill should keep documenting both `https://cloudcreate.ai` and self-hosted (e.g. Vite `npm run dev` / `npm run preview`) with the same logical paths, without implying all processing is server-side.
+- **CLI first for links:** When documenting scriptable URL generation, prefer `@cloudcreate/cli` (`cloudcreate open ...` or `npx @cloudcreate/cli open ...`) so tool keys and query parameters stay aligned with `@cloudcreate/cloudcreate-core`.
 - **Usage vs dev:** Do not add “how to modify the freetools codebase” here — that lives in the main application repository.
 - **Site truth:** For volatile URL parameters and tool keys, point readers to the live **`/ai-spec`** and **text/plain** URLs on [cloudcreate.ai](https://cloudcreate.ai) instead of duplicating them.
 - **Changes:** When adding a skill, update the **Skills** and **Structure** sections in `README.md`.

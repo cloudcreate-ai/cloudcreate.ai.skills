@@ -17,17 +17,32 @@ This skill lives in the **cloudcreate.ai.skills** repo at `skills/cloudcreate-ai
 **What it is**: A **browser-first** creative toolkit for people and AI; processing is intended to stay on the user’s device as much as possible.  
 **Locales**: Pages use a path prefix: **`en`** (English) or **`zh`** (Chinese).
 
-## 1. How to build a URL (open in one click)
+## 1. How to build or open a URL
 
-Most app routes include a locale segment; the **logical path** comes after `en` or `zh`. The **origin** (scheme + host + port) is either **production** or **your own local server**—paths below are the same.
+Prefer the official CLI when the environment can run commands and has Node.js 22 or newer. It keeps CloudCreate tool paths and supported query parameters in sync with `@cloudcreate/cloudcreate-core`.
 
-```text
-{origin}/{locale}{logical-path}
+```bash
+# Print a production URL.
+npx --yes @cloudcreate/cli open image:resize --mode width --width 1200 --quality 82 --format webp --locale en --print
+
+# Open the production browser tool directly.
+npx --yes @cloudcreate/cli open css:minify --level aggressive --locale zh
+
+# Print a self-hosted/local URL.
+npx --yes @cloudcreate/cli open image:compress --quality 75 --format webp --base-url http://127.0.0.1:5173 --locale en --print
 ```
+
+If `@cloudcreate/cli` is already installed globally, use `cloudcreate open ...` instead of `npx --yes @cloudcreate/cli open ...`.
+
+Use manual construction only when the CLI is unavailable, when you need a route/hash the CLI does not model yet, or when you are explaining the shape of a link. Most app routes include a locale segment; the **logical path** comes after `en` or `zh`. The **origin** (scheme + host + port) is either **production** or **your own local server**—paths below are the same.
 
 - `{origin}`: e.g. `https://cloudcreate.ai` **or** `http://127.0.0.1:5173` (see §1.2 for local).
 - `{locale}`: `en` or `zh`.
 - `{logical-path}`: a path from the tables below (always **starts with `/`**).
+
+```text
+{origin}/{locale}{logical-path}
+```
 
 ### 1.1 Production
 
@@ -61,7 +76,7 @@ If the user does **not** state a language, prefer their conversation language fo
 - `#table-preview` — open / preview tabular data
 - `#table-convert` — format conversion
 
-**Query parameters and shareable links**: On the deployment you use, open **`/ai-spec`** (and the **text/plain** link shown there) on **that same origin**—e.g. production: <https://cloudcreate.ai/en/ai-spec>; local: `http://127.0.0.1:5173/en/ai-spec` (port as per your run).
+**Query parameters and shareable links**: Prefer `cloudcreate open <tool> --print` for tool parameters it supports. For volatile or not-yet-modeled parameters, open **`/ai-spec`** (and the **text/plain** link shown there) on **that same origin**—e.g. production: <https://cloudcreate.ai/en/ai-spec>; local: `http://127.0.0.1:5173/en/ai-spec` (port as per your run).
 
 ## 2. Feature catalog (logical paths)
 
@@ -158,23 +173,23 @@ All paths are relative to `{origin}/{locale}`; substitute `en` or `zh` for `{loc
 
 ## 3. Intent quick map
 
-Map the need to a path, then form `{origin}/{locale}{path}` (add `#…` for table tools as needed). Set `origin` to `https://cloudcreate.ai` or to your local base (e.g. `http://127.0.0.1:5173`).
+Map the need to a CLI tool key first. When possible, run `cloudcreate open <tool> --locale <en|zh> --print` (or `npx --yes @cloudcreate/cli open ...`) to produce the URL. Use `{origin}/{locale}{path}` manually for hashes or routes not covered by the CLI. Set `origin` to `https://cloudcreate.ai` or to your local base with `--base-url`, e.g. `http://127.0.0.1:5173`.
 
-- Compress images → `/image/compress`
-- Convert to WebP / JPEG / PNG / AVIF → `/image/convert`
-- Change resolution → `/image/resize`
-- Crop / aspect ratio → `/image/crop`
-- Rotate or mirror → `/image/rotate`
-- Shrink GIF → `/image/gif`
-- Batch many images → `/image/batch`
-- View PDF in browser → `/pdf`
-- Compress PDF → `/pdf/compress`
-- Preview or convert Excel/CSV-style tables → `/table` + the right **hash**
+- Compress images → `image:compress` (`/image/compress`)
+- Convert to WebP / JPEG / PNG / AVIF → `image:convert` (`/image/convert`)
+- Change resolution → `image:resize` (`/image/resize`)
+- Crop / aspect ratio → `image:crop` (`/image/crop`)
+- Rotate or mirror → `image:rotate` (`/image/rotate`)
+- Shrink GIF → `image:gif` (`/image/gif`)
+- Batch many images → `image:batch` (`/image/batch`)
+- View PDF in browser → `pdf:view` (`/pdf`)
+- Compress PDF → `pdf:compress` (`/pdf/compress`)
+- Preview or convert Excel/CSV-style tables → `table:convert` (`/table`) + the right **hash** when needed
 - Remove Gemini mark from an image → `/remove-watermark/gemini`
-- Minify or beautify CSS → `/css/minify` or `/css/beautify`
-- Unzip or create zip (supported formats) → `/archive/decompress` or `/archive/compress`
-- Image pipeline (simple or advanced) → `/workflow` or `/workflow/advanced`
-- Write docs with preview → `/markdown`
+- Minify or beautify CSS → `css:minify` or `css:beautify` (`/css/minify`, `/css/beautify`)
+- Unzip or create zip (supported formats) → `archive:decompress` or `archive:compress` (`/archive/decompress`, `/archive/compress`)
+- Image pipeline (simple or advanced) → `workflow` or `workflow:advanced` (`/workflow`, `/workflow/advanced`)
+- Write docs with preview → `markdown:html` (`/markdown`)
 
 ## 4. Tips when replying to users
 

@@ -6,6 +6,12 @@ Public [Agent Skills](https://agentskills.io) for [CloudCreate.ai](https://cloud
 
 **Scope:** This repository is **user-facing (production site usage)** only. Maintainer-focused “how to change the codebase” content stays in the main project (e.g. `.cursor/skills/`, in-repo rules). Application repositories can consume this repo as a git package, e.g. `@cloudcreate/ai-skills`, without adding it as a git submodule. That does not move developer skills into this repo.
 
+**Companion CLI:** When an agent can run commands in a Node.js 22+ environment, use [`@cloudcreate/cli`](https://www.npmjs.com/package/@cloudcreate/cli) to build or open CloudCreate.ai links instead of hand-writing query parameters:
+
+```bash
+npx --yes @cloudcreate/cli open image:resize --mode width --width 1200 --quality 82 --format webp --locale en --print
+```
+
 ## Installing
 
 ### npx skills (recommended)
