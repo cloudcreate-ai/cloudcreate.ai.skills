@@ -14,6 +14,18 @@ npx --yes @cloudcreate/cli open image:resize --mode width --width 1200 --quality
 
 ## Installing
 
+### Quick start
+
+```bash
+npx skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills
+```
+
+Then confirm the installed skill path is available as:
+
+```text
+.../cloudcreate-ai-usage/SKILL.md
+```
+
 ### npx skills (recommended)
 
 ```bash
@@ -62,6 +74,20 @@ cloudcreate.ai.skills/
 ```
 
 Each skill directory contains a `SKILL.md` and may add a `references/` subfolder for longer material (same idea as [pixijs/pixijs-skills](https://github.com/pixijs/pixijs-skills)).
+
+## Maintainer checklist
+
+Before publishing updates:
+
+1. Ensure each skill folder name matches the `name` field in `SKILL.md` frontmatter.
+2. Run a dry run package check:
+   ```bash
+   npm publish --dry-run --access public
+   ```
+3. Validate install path with:
+   ```bash
+   npx skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills
+   ```
 
 ## License
 

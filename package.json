@@ -2,10 +2,14 @@
   "name": "@cloudcreate/skills",
   "version": "1.0.0",
   "description": "CloudCreate.ai usage skills for AI agents: feature catalog, en/zh deep links, and production or self-hosted URLs.",
+  "homepage": "https://github.com/cloudcreate-ai/cloudcreate.ai.skills",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/cloudcreate-ai/cloudcreate.ai.skills.git"
+    "url": "git+https://github.com/cloudcreate-ai/cloudcreate.ai.skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudcreate-ai/cloudcreate.ai.skills/issues"
   },
   "keywords": [
     "cloudcreate",
@@ -16,6 +20,9 @@
     "claude",
     "codex"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "skills/",
     ".claude-plugin/",
