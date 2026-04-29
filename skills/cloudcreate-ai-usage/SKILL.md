@@ -19,7 +19,7 @@ This skill lives in the **cloudcreate.ai.skills** repo at `skills/cloudcreate-ai
 
 ## 1. How to build or open a URL
 
-Prefer the official CLI when the environment can run commands and has Node.js 22 or newer. It keeps CloudCreate tool paths and supported query parameters in sync with `@cloudcreate/cloudcreate-core`.
+Prefer the official CLI when the environment can run commands and has Node.js 22 or newer. It keeps CloudCreate tool paths and supported query parameters in sync with `@cloudcreate/core`.
 
 ```bash
 # Print a production URL.

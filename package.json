@@ -1,5 +1,5 @@
 {
-  "name": "@cloudcreate/ai-skills",
+  "name": "@cloudcreate/skills",
   "version": "1.0.0",
   "description": "CloudCreate.ai usage skills for AI agents: feature catalog, en/zh deep links, and production or self-hosted URLs.",
   "license": "MIT",
