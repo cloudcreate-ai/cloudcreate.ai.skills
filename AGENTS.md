@@ -5,7 +5,7 @@ This repository holds **CloudCreate.ai usage skills** for agents that help end u
 ## Repository layout
 
 - **`skills/`** — Each subdirectory is one skill. Discovery expects `SKILL.md` at `skills/<name>/SKILL.md`.
-- **Directory name** must match the `name` field in that skill’s YAML frontmatter (e.g. `skills/cloudcreate-ai-usage/` ↔ `name: cloudcreate-ai-usage`).
+- **Directory name** must match the `name` field in that skill’s YAML frontmatter (e.g. `skills/cloudcreate-tools/` ↔ `name: cloudcreate-tools`).
 
 ## SKILL.md
 

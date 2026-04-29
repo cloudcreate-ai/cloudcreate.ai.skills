@@ -23,7 +23,7 @@ npx skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills
 Then confirm the installed skill path is available as:
 
 ```text
-.../cloudcreate-ai-usage/SKILL.md
+.../cloudcreate-tools/SKILL.md
 ```
 
 ### npx skills (recommended)
@@ -49,13 +49,37 @@ Add the `skills` directory from this repo to your skill roots (e.g. workspace `s
 | OpenAI Codex | `~/.codex/skills/`          | [docs](https://developers.openai.com/codex/skills/) |
 | OpenClaw     | `~/.openclaw/skills/` etc.  | [docs](https://docs.openclaw.ai/skills/) |
 
-Copy the folders under this repo’s **`skills/`** directory (e.g. `skills/cloudcreate-ai-usage/`) so each installed skill is `…/cloudcreate-ai-usage/SKILL.md`.
+Copy the folders under this repo’s **`skills/`** directory (e.g. `skills/cloudcreate-tools/`) so each installed skill is `…/cloudcreate-tools/SKILL.md`.
 
 ## Skills
 
 | Skill                 | Description |
 | --------------------- | ----------- |
-| **cloudcreate-ai-usage** | Production or **local/self-hosted** base URL, same paths: feature catalog, intent → URL, `en`/`zh`, hashes, `/ai-spec`; suggest online **or** local when the need fits; see skill §1.2. |
+| **cloudcreate-tools** | Production or **local/self-hosted** base URL, same paths: feature catalog, intent → URL, `en`/`zh`, hashes, `/ai-spec`; suggest online **or** local when the need fits; see skill §1.2. |
+
+## Capability matrix
+
+| User need | Recommended path | CLI link command (example) |
+| --------- | ---------------- | -------------------------- |
+| Compress image | `/image/compress` | `npx --yes @cloudcreate/cli open image:compress --quality 75 --format webp --locale en --print` |
+| Convert image format | `/image/convert` | `npx --yes @cloudcreate/cli open image:convert --quality 82 --format avif --locale en --print` |
+| Resize image | `/image/resize` | `npx --yes @cloudcreate/cli open image:resize --mode width --width 1200 --quality 82 --format webp --locale en --print` |
+| Crop image | `/image/crop` | `npx --yes @cloudcreate/cli open image:crop --preset 1:1 --quality 82 --format webp --locale en --print` |
+| Rotate image | `/image/rotate` | `npx --yes @cloudcreate/cli open image:rotate --rotate 90 --quality 82 --format webp --locale en --print` |
+| GIF optimization | `/image/gif` | `npx --yes @cloudcreate/cli open image:gif --locale en --print` |
+| Batch image workflow | `/image/batch` | `npx --yes @cloudcreate/cli open image:batch --locale en --print` |
+| Read PDF | `/pdf` | `npx --yes @cloudcreate/cli open pdf:view --locale en --print` |
+| Compress PDF | `/pdf/compress` | `npx --yes @cloudcreate/cli open pdf:compress --locale en --print` |
+| CSS minify | `/css/minify` | `npx --yes @cloudcreate/cli open css:minify --level aggressive --locale en --print` |
+| CSS beautify | `/css/beautify` | `npx --yes @cloudcreate/cli open css:beautify --locale en --print` |
+| Archive compress | `/archive/compress` | `npx --yes @cloudcreate/cli open archive:compress --format zip --locale en --print` |
+| Archive decompress | `/archive/decompress` | `npx --yes @cloudcreate/cli open archive:decompress --locale en --print` |
+| Table preview/convert | `/table` + hash | `npx --yes @cloudcreate/cli open table:convert --format csv --locale en --print` |
+| Markdown preview | `/markdown` | `npx --yes @cloudcreate/cli open markdown:html --locale en --print` |
+| Workflow builder | `/workflow` | `npx --yes @cloudcreate/cli open workflow --locale en --print` |
+| Advanced workflow graph | `/workflow/advanced` | `npx --yes @cloudcreate/cli open workflow:advanced --locale en --print` |
+
+For self-hosted usage, append `--base-url http://127.0.0.1:5173` (or your local origin) to the same CLI command.
 
 ## Structure
 
@@ -69,7 +93,7 @@ cloudcreate.ai.skills/
   .claude-plugin/
   .cursor-plugin/
   skills/
-    cloudcreate-ai-usage/
+    cloudcreate-tools/
       SKILL.md
 ```
 
@@ -88,6 +112,43 @@ Before publishing updates:
    ```bash
    npx skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills
    ```
+
+## Local CLI verification (Codex)
+
+The following commands were verified locally with the `skills` CLI.
+
+Project-level install (current repo):
+
+```bash
+npx --yes skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills --skill cloudcreate-tools --agent codex -y --copy
+```
+
+Expected installed file:
+
+```text
+/Users/<you>/.../<project>/.agents/skills/cloudcreate-tools/SKILL.md
+```
+
+Global install:
+
+```bash
+npx --yes skills add https://github.com/cloudcreate-ai/cloudcreate.ai.skills --skill cloudcreate-tools --agent codex -g -y --copy
+```
+
+Expected installed file:
+
+```text
+~/.agents/skills/cloudcreate-tools/SKILL.md
+```
+
+Removal validation:
+
+```bash
+npx --yes skills remove --skill cloudcreate-tools --agent codex -y
+npx --yes skills remove --skill cloudcreate-tools --agent codex -g -y
+```
+
+If `--copy` mode leaves local files behind in `.agents/skills` after removal, delete the skill directory manually as a cleanup fallback.
 
 ## License
 
