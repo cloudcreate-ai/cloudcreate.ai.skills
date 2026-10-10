@@ -74,6 +74,7 @@ Copy the folders under this repo’s **`skills/`** directory (e.g. `skills/cloud
 | CSS beautify | `/css/beautify` | `npx --yes @cloudcreate/cli open css:beautify --locale en --print` |
 | Archive compress | `/archive/compress` | `npx --yes @cloudcreate/cli open archive:compress --format zip --locale en --print` |
 | Archive decompress | `/archive/decompress` | `npx --yes @cloudcreate/cli open archive:decompress --locale en --print` |
+| RAR extract | `/archive/rar` | `npx --yes @cloudcreate/cli open archive:rar --locale en --print` |
 | Table preview/convert | `/table` + hash | `npx --yes @cloudcreate/cli open table:convert --format csv --locale en --print` |
 | Markdown preview | `/markdown` | `npx --yes @cloudcreate/cli open markdown:html --locale en --print` |
 | Workflow builder | `/workflow` | `npx --yes @cloudcreate/cli open workflow --locale en --print` |

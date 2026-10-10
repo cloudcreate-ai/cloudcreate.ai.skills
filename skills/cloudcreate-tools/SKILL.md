@@ -139,6 +139,7 @@ All paths are relative to `{origin}/{locale}`; substitute `en` or `zh` for `{loc
 |--------|------|
 | Archive hub (extract vs pack) | `/archive` |
 | Extract / decompress | `/archive/decompress` |
+| RAR extract (unencrypted, single archive) | `/archive/rar` |
 | Create archive / pack | `/archive/compress` |
 
 ### Workflows (image pipelines)
@@ -188,6 +189,7 @@ Map the need to a CLI tool key first. When possible, run `cloudcreate open <tool
 - Remove Gemini mark from an image → `/remove-watermark/gemini`
 - Minify or beautify CSS → `css:minify` or `css:beautify` (`/css/minify`, `/css/beautify`)
 - Unzip or create zip (supported formats) → `archive:decompress` or `archive:compress` (`/archive/decompress`, `/archive/compress`)
+- Extract one unencrypted RAR → `archive:rar` (`/archive/rar`)
 - Image pipeline (simple or advanced) → `workflow` or `workflow:advanced` (`/workflow`, `/workflow/advanced`)
 - Write docs with preview → `markdown:html` (`/markdown`)
 
